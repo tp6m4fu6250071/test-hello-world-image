@@ -56,6 +56,10 @@ jobs:
           echo $OSTYPE
           uname -amnprsv
           aws --version
+          curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+          unzip awscli-bundle.zip
+          sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+          aws --version
           ###
           MANIFEST=$(aws ecr batch-get-image --repository-name hello-world --image-ids imageTag=$TAG --query 'images[].imageManifest' --output text)
           aws ecr put-image --repository-name hello-world --image-tag 1.0.3 --image-manifest "$MANIFEST"
