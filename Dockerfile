@@ -1,2 +1,2 @@
 ### test7
-FROM hello-world
+FROM hello-world:linux
