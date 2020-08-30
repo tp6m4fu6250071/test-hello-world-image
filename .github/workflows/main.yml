@@ -58,5 +58,5 @@ jobs:
           #docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           #echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
           MANIFEST=$(aws ecr batch-get-image --repository-name hello-world --image-ids imageTag=latest --query 'images[].imageManifest' --output text)
-          aws ecr put-image --repository-name hello-world --image-tag 2.0.1 --image-manifest "$MANIFEST"
+          aws ecr put-image --repository-name hello-world --image-tag 2.0.2 --image-manifest "$MANIFEST"
           aws ecr describe-images --repository-name hello-world
