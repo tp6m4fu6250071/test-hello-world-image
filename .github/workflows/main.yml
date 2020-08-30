@@ -54,12 +54,13 @@ jobs:
           # Build a docker container and
           # push it to ECR so that it can
           # be deployed to ECS.
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
-          #TEST_MANIFEST=$(aws ecr batch-get-image --repository-name hello-world --image-ids imageTag=latest --query 'images[].imageManifest' --output text)
-          #echo $TEST_MANIFEST
-          #MANIFEST=$(aws ecr batch-get-image --repository-name hello-world --image-ids imageTag=test0 --query 'images[].imageManifest' --output text)
-          #echo $MANIFEST
-          #aws ecr put-image --repository-name hello-world --image-tag 2.0.4 --image-manifest "$MANIFEST"
-          #aws ecr describe-images --repository-name hello-world
+          #docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          #docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          #echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+          ######
+          TEST_MANIFEST=$(aws ecr batch-get-image --repository-name hello-world --image-ids imageTag=latest --query 'images[].imageManifest' --output text)
+          echo $TEST_MANIFEST
+          MANIFEST=$(aws ecr batch-get-image --repository-name hello-world --image-ids imageTag=test-github --query 'images[].imageManifest' --output text)
+          echo $MANIFEST
+          aws ecr put-image --repository-name hello-world --image-tag 2.0.5 --image-manifest "$MANIFEST"
+          aws ecr describe-images --repository-name hello-world
