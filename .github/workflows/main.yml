@@ -61,7 +61,8 @@ jobs:
           TAG='latest'
           aws ecr batch-get-image --repository-name hello-world --image-ids imageTag=$TAG
           TEST_MANIFEST=$(aws ecr batch-get-image --repository-name hello-world --image-ids imageTag=$TAG --query 'images[].imageManifest' --output text)
-          echo $TEST_MANIFEST | cat -v 
+          echo $TEST_MANIFEST | cat -v
+          echo $TEST_MANIFEST | cat -e
           #TAG='test-github'
           #aws ecr batch-get-image --repository-name hello-world --image-ids imageTag=$TAG
           #MANIFEST=$(aws ecr batch-get-image --repository-name hello-world --image-ids imageTag=$TAG --query 'images[].imageManifest' --output text)
