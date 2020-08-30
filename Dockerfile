@@ -1,3 +1,3 @@
 ### test7
 FROM hello-world
-RUN echo test
+EXPOSE 8080
