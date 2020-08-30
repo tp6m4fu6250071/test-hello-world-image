@@ -66,5 +66,5 @@ jobs:
           aws ecr batch-get-image --repository-name hello-world --image-ids imageTag=$TAG
           MANIFEST=$(aws ecr batch-get-image --repository-name hello-world --image-ids imageTag=$TAG --query 'images[].imageManifest' --output text)
           echo $MANIFEST
-          aws ecr put-image --repository-name hello-world --image-tag 1.0.0 --image-manifest "$MANIFEST"
+          aws ecr put-image --repository-name hello-world --image-tag 1.0.1 --image-manifest "$MANIFEST"
           aws ecr describe-images --repository-name hello-world
