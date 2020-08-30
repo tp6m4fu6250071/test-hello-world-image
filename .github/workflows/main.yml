@@ -63,7 +63,7 @@ jobs:
           sudo ./aws/install
           aws --version
           aws ecr batch-get-image --repository-name hello-world --image-ids imageTag=$TAG
-          aws ecr batch-get-image --repository-name hello-world --image-ids imageTag=$TAG --query 'images[].imageManifest' --output text
+          aws ecr batch-get-image --repository-name hello-world --image-ids imageTag=$TAG --query 'images[].imageManifest' --output json
           ###
           MANIFEST=$(aws ecr batch-get-image --repository-name hello-world --image-ids imageTag=$TAG --query 'images[].imageManifest' --output text)
           aws ecr put-image --repository-name hello-world --image-tag ttt-1 --image-manifest "$MANIFEST"
