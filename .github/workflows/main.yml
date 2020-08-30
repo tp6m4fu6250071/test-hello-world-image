@@ -10,7 +10,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
-      python-version: [3.7]
+      matrix:
+        python-version: [3.7]
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
