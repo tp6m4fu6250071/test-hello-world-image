@@ -54,7 +54,9 @@ jobs:
           # Build a docker container and
           # push it to ECR so that it can
           # be deployed to ECS.
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
-        
+          #docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          #docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          #echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+          MANIFEST=$(aws ecr batch-get-image --repository-name hello-world --image-ids imageTag=latest --query 'images[].imageManifest' --output text)
+          aws ecr put-image --repository-name amazonlinux --image-tag 2.0.0 --image-manifest "$MANIFEST"
+          aws ecr describe-images --repository-name hello-world
